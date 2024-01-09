@@ -265,16 +265,6 @@ while (true)
     end
 end
 
-function result = calc_syndrome(n, rds_bits, check)
-    result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    chunk = rds_bits(n:n+25);
-    for bit_check = 1:26
-        if (chunk(bit_check))
-            result = xor(result, check(bit_check, :));
-        end
-    end
-end
-
 function [programme_name, radio_text] = process_rds(n, rds_bits, programme_name, radio_text)
     block_A = rds_bits(n:n+25);
     block_B = rds_bits(n+26:n+51);
@@ -372,6 +362,16 @@ function [programme_name, radio_text] = process_rds(n, rds_bits, programme_name,
 
         if text_seg == 15
             radio_text = radio_text_buffer;
+        end
+    end
+end
+
+function result = calc_syndrome(n, rds_bits, check)
+    result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    chunk = rds_bits(n:n+25);
+    for bit_check = 1:26
+        if (chunk(bit_check))
+            result = xor(result, check(bit_check, :));
         end
     end
 end
