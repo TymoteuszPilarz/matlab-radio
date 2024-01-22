@@ -277,7 +277,7 @@ function [programme_name, radio_text] = process_rds(n, rds_bits, programme_name,
     if (type(1:4) == [0, 0, 0, 0])
         persistent programme_name_buffer;
         if isempty(programme_name_buffer)
-            programme_name_buffer = blanks(64);
+            programme_name_buffer = blanks(8);
         end
 
         persistent prev_name_seg;
